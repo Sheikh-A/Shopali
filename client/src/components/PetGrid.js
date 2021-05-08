@@ -19,9 +19,12 @@ export default function PetGrid() {
   return (
     <div className="petcontainer">
       <div>
-        <button className="blackButtonDog" onClick={() => setBreed("husky")}>SF Huskies</button>
-        <button className="blackButtonDog" onClick={() => setBreed("pug")}>AMS Pugs</button>
-        <button className="blackButtonDog" onClick={() => setBreed("mix")}>HKG Mix</button>
+        <button className="blackButtonDog" onClick={() => setBreed("husky")}>Huskies</button>
+        <button className="blackButtonDog" onClick={() => setBreed("pug")}>Pugs</button>
+        <button className="blackButtonDog" onClick={() => setBreed("mix")}>Mix</button>
+        <button className="blackButtonDog" onClick={() => setBreed("pitbull")}>Pitbull</button>
+        <button className="blackButtonDog" onClick={() => setBreed("labrador")}>Labrador</button>
+        <button className="blackButtonDog" onClick={() => setBreed("lhasa")}>Lhasa</button>
       </div>
       <div className="petentry">
         {pets.map((pet, index) => {

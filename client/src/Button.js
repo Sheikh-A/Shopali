@@ -5,13 +5,12 @@ const Button = styled.button`
   font-size: 1.1rem;
   margin-top: 10px;
   margin-bottom: 20px;
-  border-radius: 8px;
+  border-radius: 20px;
   padding: 15px 20px 10px 10px;
   height: 50px;
-  width: 165px;
+  width: 185px;
   background: white;
   border: none;
-  border-radius: 3px;
   color: black;
   @media (min-width: 2000px) {
     margin: 5px;
