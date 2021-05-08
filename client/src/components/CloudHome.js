@@ -17,7 +17,7 @@ export default function Home() {
     }, []);
     return (
         <div>
-            <h1 className="title">Cloudinary Gallery</h1>
+            <h1 className="title">Cloud Image Gallery</h1>
             <div className="gallery">
                 {imageIds &&
                     imageIds.map((imageId, index) => (
@@ -25,8 +25,7 @@ export default function Home() {
                             key={index}
                             cloudName="shopali"
                             publicId={imageId}
-                            width="300"
-                            crop="scale"
+                            width="100"
                         />
                     ))}
             </div>

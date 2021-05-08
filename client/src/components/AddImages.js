@@ -28,7 +28,7 @@ const SignupForm = (props) => {
       .post(`http://localhost:3300/api/images`, values)
       .then((res) => {
 
-        props.history.push('/flexdata');
+        props.history.push('/images');
       })
       .catch((err) => {
         console.log('Error adding image: ', err);

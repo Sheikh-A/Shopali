@@ -2,6 +2,7 @@
 import { jsx } from 'theme-ui';
 import React, {useState} from 'react';
 import Alert from '../components/Alert.js';
+import Button from '../Button.js';
 
 
 export default function Upload() {
@@ -59,18 +60,18 @@ export default function Upload() {
           <h1 className="title">Upload an Image</h1>
           <Alert msg={errMsg} type="danger" />
           <Alert msg={successMsg} type="success" />
-          <form onSubmit={handleSubmitFile} className="form">
+          <form onSubmit={handleSubmitFile} className="file">
               <input
                   id="fileInput"
                   type="file"
                   name="image"
                   onChange={handleFileInputChange}
                   value={fileInputState}
-                  className="form-input"
+                  className="form-cloud"
               />
-              <button className="btn" type="submit">
+              <Button type="primary">
                   Submit
-              </button>
+              </Button>
           </form>
           {previewSource && (
               <img

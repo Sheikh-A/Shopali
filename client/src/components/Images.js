@@ -4,6 +4,8 @@ import {axiosWithAuth} from "../utils/axiosWithAuth"
 function ImageList() {
 
     const [ImageList, setImageList] = useState([])
+    const [imageDeleted, setImageDeleted] = useState(false);
+    const [reloadingImages, setReloadingImages] = useState(false);
 
     useEffect(() => {
         axiosWithAuth().get('http://localhost:3300/api/images')
@@ -14,7 +16,24 @@ function ImageList() {
         .catch(err => {
             console.log(err)
         })
-    }, []);
+    }, [reloadingImages]);
+
+    const deleteImage = (image_id) => {
+
+        axiosWithAuth()
+          .delete(`http://localhost:3300/api/images/${image_id}`)
+          .then((res) => {
+            console.log("DELETE deleteImage EditProduct.js: ", res);
+            setReloadingImages(!reloadingImages);
+            setImageDeleted(true);
+            setTimeout(function () {
+                setImageDeleted(false);
+        }, 4000);
+          })
+          .catch((err) => {
+            console.log("deleteImage ", err.message);
+          });
+      };
 
 
   return (
@@ -22,10 +41,11 @@ function ImageList() {
         {(ImageList.length > 0 )
         ? ImageList.map(imagedata =>
             <div key={imagedata.id} className="data-card">
-                <h3>Image ID: {imagedata.id}</h3>
+                <h3>Item Name: {imagedata.description}</h3>
                 <img src={imagedata.image_url}></img>
-                <h3>Description: {imagedata.description}</h3>
-                <h3>Price: {imagedata.price}</h3>
+                <h3>Image ID: {imagedata.id}</h3>
+                <h3>Price: ${imagedata.price}</h3>
+                <button onClick={() => deleteImage(imagedata.id)}>Delete Image</button>
             </div>
 
         ): localStorage.getItem('token')
