@@ -33,7 +33,7 @@ const SignupForm = (props) => {
       .catch((err) => {
         console.log('Error adding image: ', err);
         window.alert("Database Error");
-        props.history.push('/');
+        props.history.push('/image');
       });
   };
 
