@@ -7,6 +7,9 @@ function ImageList() {
     const [imageDeleted, setImageDeleted] = useState(false);
     const [reloadingImages, setReloadingImages] = useState(false);
 
+
+    imageDeleted(false);
+
     useEffect(() => {
         axiosWithAuth().get('https://backend-shopali.herokuapp.com/api/images')
         .then(res => {
@@ -25,6 +28,7 @@ function ImageList() {
           .then((res) => {
             console.log("DELETE deleteImage EditProduct.js: ", res);
             setReloadingImages(!reloadingImages);
+
             setImageDeleted(true);
             setTimeout(function () {
                 setImageDeleted(false);
@@ -42,7 +46,7 @@ function ImageList() {
         ? ImageList.map(imagedata =>
             <div key={imagedata.id} className="data-card">
                 <h3>Item Name: {imagedata.description}</h3>
-                <img src={imagedata.image_url}></img>
+                <img src={imagedata.image_url} alt="Image URL"></img>
                 <h3>Image ID: {imagedata.id}</h3>
                 <h3>Price: ${imagedata.price}</h3>
                 <button onClick={() => deleteImage(imagedata.id)}>Delete Image</button>
