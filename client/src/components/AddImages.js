@@ -25,7 +25,7 @@ const SignupForm = (props) => {
 
   const handleSubmit = (values) => {
     return axiosWithAuth()
-      .post(`http://localhost:3300/api/images`, values)
+      .post(`https://backend-shopali.herokuapp.com/api/images`, values)
       .then((res) => {
 
         props.history.push('/images');

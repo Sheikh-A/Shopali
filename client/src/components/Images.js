@@ -8,7 +8,7 @@ function ImageList() {
     const [reloadingImages, setReloadingImages] = useState(false);
 
     useEffect(() => {
-        axiosWithAuth().get('http://localhost:3300/api/images')
+        axiosWithAuth().get('https://backend-shopali.herokuapp.com/api/images')
         .then(res => {
             console.log("users post response" , res.data);
             setImageList(res.data);
@@ -21,7 +21,7 @@ function ImageList() {
     const deleteImage = (image_id) => {
 
         axiosWithAuth()
-          .delete(`http://localhost:3300/api/images/${image_id}`)
+          .delete(`https://backend-shopali.herokuapp.com/api/images/${image_id}`)
           .then((res) => {
             console.log("DELETE deleteImage EditProduct.js: ", res);
             setReloadingImages(!reloadingImages);

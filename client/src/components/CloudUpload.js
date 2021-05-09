@@ -42,7 +42,7 @@ export default function Upload() {
 
   const uploadImage = async (base64EncodedImage) => {
       try {
-          await fetch('http://localhost:3300/api/cloudinary', {
+          await fetch('https://backend-shopali.herokuapp.com/api/cloudinary', {
               method: 'POST',
               body: JSON.stringify({ data: base64EncodedImage }),
               headers: { 'Content-Type': 'application/json' },
