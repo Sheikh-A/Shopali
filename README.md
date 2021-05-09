@@ -3,11 +3,11 @@
  <h2 align="center">GitHub Readme Stats</h2>
 </p>
  <p align="center">
-    <a href="https://github.com/Sheikh-A/flexproject/issues">
-      <img alt="Issues" src="https://img.shields.io/github/issues/Sheikh-A/flexproject?color=0088ff" />
+    <a href="https://github.com/Sheikh-A/shopali/issues">
+      <img alt="Issues" src="https://img.shields.io/github/issues/Sheikh-A/shopali?color=0088ff" />
     </a>
-    <a href="https://github.com/Sheikh/flexport/pulls">
-      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/Sheikh-A/flexproject?color=0088ff" />
+    <a href="https://github.com/Sheikh/shopali/pulls">
+      <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/Sheikh-A/shopali?color=0088ff" />
     </a>
     <br />
     <br />
@@ -21,21 +21,54 @@
 
 
 ![Ali's github stats](https://github-readme-stats.vercel.app/api?username=Sheikh-A&show_icons=true&hide=stars&theme=dark)
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Sheikh-A&hide=python)](https://github.com/Sheikh-A/flexproject)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=Sheikh-A&hide=python)](https://github.com/Sheikh-A/shopali)
 
 
-# Flex RESTful APIs with Express
+# Shopali RESTful APIs with Express
 # Author: Ali Sheikh
 
-#Frontend Deployed here: https://aliport.vercel.app/
+#Frontend Deployed here: https://shopali.vercel.app/
 
-#Backend Deployed here: https://aliport.herokuapp.com/
+#Backend Deployed here: https://backend-shopali.herokuapp.com/
 
-#Endpoints (must be logged in):
-- https://aliport.herokuapp.com/api/auth
-- https://aliport.herokuapp.com/api/countries (need to be logged in)
-- https://aliport.herokuapp.com/api/flex      (need to be logged in see additional CRUD endpoints below)
-- https://aliport.herokuapp.com/api/users     (need to be logged in)
+#INSTRUCTIONS - https://shopali.vercel.app/
+1. User must register an account to login (please note given we are using Heroku and a free instance, DB may be slow to respond)
+2. Once registered user can login [might take a minute due to Heroku DB free instance]
+3. There is Form Validation when registering a user (username must be unique and cannot be left blank, password cannot be blank)
+
+I've built 3 different Image Upload options:
+
+**A. Images & Add images (URL Upload) [Custom Built API endpoints]**
+
+  -Images Tab displays all the images that have been uploaded via a URL, and has some base images already uploaded
+  
+  -Images Tab: User can delete images by clicking the button (NOTE: There might be a delay when interacting with Heroku backend, though if you refresh the page the image should be deleted)
+  
+  -Add Images is where user can upload an Image URL, Description, and Price; all three are required
+  
+  -Add Images also has Form Validation to make sure the User inputs are non-empty and contain the correct info
+
+**B. Cloud Images & Cloud Upload: [Custom Built API endpoints]**
+
+  -Cloud Images displays all images in the "shopali" cloudinary cloud instance
+  
+  -Cloud Upload: Here is where the User can upload an image from the user's own computer files
+  
+  -Cloud Upload: Images uploaded from here are uploaded directly to the Cloudinary cloud, and will be displayed afterwards on the Cloud Images tab
+
+**C. Puppies: [Public API]**
+  
+  - This tab interacts with the public Dog CEO API [https://dog.ceo/] for Dog Images
+  
+  - Click on the type of dog you would like to see and they will populate on the page
+
+
+#Backend Endpoints:
+- https://backend-shopali.herokuapp.com/
+- https://backend-shopali.herokuapp.com/api/auth
+- https://backend-shopali.herokuapp.com/api/images (need to be logged in - POSTMAN)
+- https://backend-shopali.herokuapp.com/api/cloudinary
+- https://backend-shopali.herokuapp.com/api/users/admin     (need to be admin and logged in - POSTMAN)
 
 
 
@@ -53,16 +86,16 @@ User Authentication System: Hashs user's passwords before saving it to the datab
 
 Uses **JSON Web Tokens** to keep users authenticated across requests.
 
-Admin Control: Uses middleware to check the "department" of user to see if they are "admin". Only admin can delete users & clients & only admin can see all users.
+Admin Control: Uses middleware to check the "department" of user to see if they are "admin". Only admin can delete users & only admin can see all users.
 
 ### Design of the endpoints.
 
 | Method | Endpoint      | Description                                                                                                                                                                                                                                                            |
 | ------ | ------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | POST   | /api/auth/register | Creates a `user` using the information sent inside the `body` of the request. **Hashes the password** before saving the user to the database.                                                                                                                            |
-| POST   | /api/auth/login    | Uses the credentials sent inside the `body` to authenticate the user. On successful login, creates a new JWT with the user id as the subject and sends it back to the client. If login fails, responds with the correct status code           |
+| POST   | /api/auth/login    | Uses the credentials sent inside the `body` to authenticate the user. On successful login, creates a new JWT with the user id as the subject and sends it back to the image. If login fails, responds with the correct status code           |
 | GET    | /api/users/admin    | If the user is logged in, responds with an array of all the users contained in the database. Only admin can view users.
-| DELETE | /api/users/admin/:id    | If the user is logged in as admin, will delete user with specified id.
+| DELETE | /api/users/admin/:id    | If the user is logged in as admin (department = admin), will delete user with specified id.
 
 ## Backend API Overview:
 
@@ -72,7 +105,7 @@ Admin Control: Uses middleware to check the "department" of user to see if they 
 - API endpoints & HTTP Codes
 ## Description
 
-Uses `Node.js` and `Express` to build a sample Flex API that performs _CRUD_ operations on `dummy data`.
+Uses `Node.js` and `Express` to build the Shopali API that performs _CRUD_ operations on `given data`.
 
 ### Database Persistence Helpers
 
@@ -80,98 +113,122 @@ The `data` folder contains a database populated with test `objects`.
 
 Database access will be done using the `dbConfig.js` file included inside the `data` folder.
 
-Helpers are set up with the `flex-model.js` and the following methods are created:
+### Users Model
 
-- `find()`: calling find returns a promise that resolves to an array of all the `clients` contained in the database.
-- `findById()`: this method expects an `id` as it's only parameter and returns the client corresponding to the `id` provided or an empty array if no client with that `id` is found.
-- `add()`: calling add passing it a `client` object will add it to the database and return an object with the `id` of the inserted client. The object looks like this:
+This module controls the users registered for the application. Functions require {"department":"admin"} to access and has the following methods:
+Admin privaleges are created via the custom middleware file called: "check-role-middleware", created to check if a user's department = admin.  
+
+- `find()`: calling find returns a promise that resolves to an array of all the `users` contained in the database, must be admin to view.
+- `remove()`: the remove method accepts an `id` as its first parameter and upon successfully deleting the user from the database, must be admin to delete.
+
+
+### Images_Model
+This module allows user to upload a URL of an image, add its description and add its price. Also allows users to view all these image URL uploads. 
+Helpers are set up with the `image-model.js` and the following methods are created:
+
+- `find()`: calling find returns a promise that resolves to an array of all the `images` contained in the database.
+- `findById()`: this method expects an `id` as it's only parameter and returns the image corresponding to the `id` provided or an empty array if no image with that `id` is found.
+- `add()`: calling add passing it a `image` object will add it to the database and return an object with the `id` of the inserted image. The object looks like this:
     `{
         "id": 1,
-        "client_name": "Test",
-        "client_segment": "SMB"
-    },` The id is auto-generated while the user has to input client_name and client_segment (can only insert SMB, Mid-Market, Enterprise, Emerging)
-- `update()`: accepts two arguments, the first is the `id` of the client to update and the second is an object with the `changes` to apply. It returns the updated record. The id is taken from the URI. Here are the inputs:
+        "image_url": "www.dogceo.com/image/1",
+        "description": "Dog ball"
+        "price": 10.42
+    },` The id is auto-generated while the user has to input image_url, description, and price
+- `update()`: accepts three arguments, the first is the `id` of the image to update and the second is an object with the `changes` to apply. It returns the updated record. The id is taken from the URI. Here are the inputs:
         `{
-            "client_name": "Test1",
-            "client_segment": "SMB"
+            "id": "Test1",
+            "image_url": "www.dogceo/com/image/2",
+            "description": "Dog 2",
+            "price": 100.00
+
         },`
-- `remove()`: the remove method accepts an `id` as its first parameter and upon successfully deleting the client from the database it returns the client_id that was deleted.
-- `findClientShipments()`: the findClientShipments accepts a `clientId` as its first parameter and returns all shipments on the client associated with the client id.
-- `findShipmentById()`: accepts an `id` and returns the Shipment associated with that id.
-- `insertShipment()`: calling insert Shipment while passing it a `Shipment` object will add it to the database and return an object with the `id` of the inserted Shipment. The object looks like this:
-`{
-    "shipment_name": "PlayStation5",
-    "client_id": 1
-}`. This method will throw an error if the `client_id` field in the `Shipment` object does not match a valid client id in the database.
+- `remove()`: the remove method accepts an `id` as its first parameter and upon successfully deleting the image from the database it returns the image_id that was deleted.
+- `findAllImages()`: returns a list of all the image URLs
 
+### Cloudinary Model
+- Requires a CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET which are defined as env variables in Heroku and a .env file in local instance
+- `get`: calling returns a list of images in the specific cloud repository using CLOUD_NAME
+- `post`: calling post adds an image from your computer files directly uploaded to the Cloudinary cloud  
 
-### Flex API Client Schema
-
-Client in the database has the following structure:
+### Users Schema
+Registering Users in the database:
 
 ```js
 {
   "id": 1, //Autogenerated
-  "client_name": "Test1", //STRING required
-  "client_segment": "SMB", //STRING required, SMB, Emerging, Enterprise or Mid-Market ONLY
+  "username": "Ali", //STRING required, unique
+  "password": "SMB", //STRING required
+  "department": "admin", //STRING optional
+}
+```
+
+### Image API image Schema
+
+image in the database has the following structure:
+
+```js
+{
+  "id": 1, //Autogenerated
+  "image_url": "Test1", //Valid URL required
+  "description": "SMB", //STRING required
+  "price": 10.80, //Number required
   "created_at": "2020-12-01 08:35:28", //Autogenerated
   "updated_at": "2020-12-01 08:35:28".  //Autogenerated
 }
 ```
 
-### Shipment Schema
+### Cloudinary Schema
 
-A Shipment in the database has the following structure:
+A Cloud in the database has the following structure:
 
 ```js
 {
-  "id": 1, //Autogenerated
-  "shipment_name": "Blue Tech",//STRING required
-  "client_id": 1, //Foreign Key, client_id MUST exist, otherwise shipment will not get created
-  "created_at": "2020-12-01 08:35:28",//Autogenerated
-  "updated_at": "2020-12-01 08:35:28",//Autogenerated
-  "client_name": "Blue Tech" //Auto joined using Foreign Key
-    },
+  "filename": 1, //Unique generated from image upload
+},
 ```
 ### Endpoints
 
-Flex API Endpoints
+Shopali API Endpoints
 
 | Method | Endpoint                | Description                                                                                                                                                                 |
 | ------ | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| POST   | /api/flex              | Creates a client using the information sent inside the `request body`.                                                                                                        |
-| POST   | /api/shipments | Creates a Shipment for the client with the specified id using information sent inside of the `request body`. Client_ID is required field and must exist in table                                                                                                                 |
-| GET    | /api/flex              | Returns an array of all the client objects contained in the database.                                                                                                         |
-| GET    | /api/flex/:id          | Returns the client object with the specified id.                                                                                                                              |
-| GET    | /api/flex/shipments/:id | Returns an array of all the Shipment objects associated with the client with the specified id.                                                                                 |
-| DELETE | /api/flex/:id          | Removes the client with the specified id and returns the deleted client id                                            |
-| PUT    | /api/flex/:id          | Updates the client with the specified `id` using data from the `request body`. Returns the modified document.                   
+| POST   | /api/images             | Creates an image using the information sent inside the `request body`.                                                                                                        |
+| POST   | /api/cloudinary         | Uploads an image from your computer files to the Cloudinary cloud instance                                                                                                    |
+| GET    | /api/images              | Returns an array of all the image objects contained in the database.                                                                                                         |
+| GET    | /api/images/:id          | Returns the image object with the specified id.                                                                                                                              |
+| DELETE | /api/images/:id          | Removes the image with the specified id and returns the deleted image id                                            |
+| PUT    | /api/images/:id          | Updates the image with the specified `id` using data from the `request body`. Returns the modified document.                   
 
 ### SAMPLE END POINTS TO USE WITH POSTMAN / INSOMNIA
-- GET  |  https://aliport.herokuapp.com/api/flex
-- GET  |  https://aliport.herokuapp.com/api/flex/1
-- GET  |  https://aliport.herokuapp.com/api/flex/shipments/
-- GET  |  https://aliport.herokuapp.com/api/flex/shipments/3
-- POST |  https://aliport.herokuapp.com/api/flex
-- POST |  https://aliport.herokuapp.com/api/flex/shipments
-- DEL  |  https://aliport.herokuapp.com/api/flex/3 (must be admin)
-- PUT  |  https://aliport.herokuapp.com/api/flex/1
+- API  |  https://backend-shopali.herokuapp.com                          | [AUTH not required]
+- GET  |  https://backend-shopali.herokuapp.com/api/images               | [AUTH required]
+- GET  |  https://backend-shopali.herokuapp.com/api/images/1             | [AUTH required]
+- GET  |  https://backend-shopali.herokuapp.com/api/cloudinary           | [AUTH required]
+- POST |  https://backend-shopali.herokuapp.com/api/images               | [AUTH required]
+- POST |  https://backend-shopali.herokuapp.com/api/cloudinary           | [AUTH required]
+- DEL  |  https://backend-shopali.herokuapp.com/images/2                 | [AUTH required] 
+- PUT  |  https://backend-shopali.herokuapp.com/api/images/1             | [AUTH required] 
 
 Auth:
-- POST | https://aliport.herokuapp.com/api/auth/login
-- POST | https://aliport.herokuapp.com/api/auth/register
-- POST | https://aliport.herokuapp.com/api/auth/login (use Authorization header + token generated if success)
-- GET  | https://aliport.herokuapp.com/api/users/admin (must be admin)
-- DEL  | https://aliport.herokuapp.com/api/users/admin/2 (must be admin)
+- POST | https://backend-shopali.herokuapp.com/api/auth/login
+- POST | https://backend-shopali.herokuapp.com/api/auth/register
+- POST | https://backend-shopali.herokuapp.com/api/auth/login (use Authorization header + token generated if success)
+- GET  | https://backend-shopali.herokuapp.com/api/users/admin (must be admin)
+- DEL  | https://backend-shopali.herokuapp.com/api/users/admin/2 (must be admin)
 
+### Backend Testing
+- Each model in the backend has an assoicated test file in the same folder
+- Test run via `npm run test` and uses Jest framework
+- All tests passing currently
 
 ### Front End
 - Front end is built & deployed using create-react-app (deployed via Vercel)
 - Uses Axios & AxiosWithAuth for endpoints
     -error handling for all async (axios/AJAX) calls
 - React Forms
-- Adding in Form Validation using Yup / Formik for the Registration page 
-- Fetches data from Flex API above, link is from Heroku
+- Adding in Form Validation using Yup / Formik for the Registration & Image pages 
+- Fetches data from Shopali API above, link is from Heroku
 - Uses React Router
 - Styled-Components / Material UI for design
 - Dog CEO API built into front-end for fun, this is accessable without logging in.
