@@ -5,7 +5,7 @@ export default function Home() {
     const [imageIds, setImageIds] = useState();
     const loadImages = async () => {
         try {
-            const res = await fetch('http://localhost:3300/api/cloudinary');
+            const res = await fetch('https://backend-shopali.herokuapp.com/api/cloudinary');
             const data = await res.json();
             setImageIds(data);
         } catch (err) {
