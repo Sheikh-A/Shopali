@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
 const morgan = require('morgan');
+const helmet = require('helmet');
 
 const authenticate = require('../auth/authenticate-middleware.js');
 const authRouter = require('../auth/auth-router.js');
@@ -23,7 +23,7 @@ server.use(express.static('public'));
 server.use('/api/auth', authRouter);
 server.use('/api/images', authenticate, imageRouter)
 server.use("/api/users", authenticate, usersRouter);
-server.use("/api/cloudinary", cloudinaryRouter);
+server.use("/api/cloudinary", authenticate, cloudinaryRouter);
 
 server.get('/', (req, res) => {
     res.status(200).send((`<h1>API: Up Up and Away, welcome Shopify Friends!</h1>`))
