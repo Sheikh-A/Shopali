@@ -34,32 +34,41 @@
 #INSTRUCTIONS - https://shopali.vercel.app/
 1. User must register an account to login (please note given we are using Heroku and a free instance, DB may be slow to respond)
 2. Once registered user can login [might take a minute due to Heroku DB free instance]
+3. There is Form Validation when registering a user (username must be unique and cannot be left blank, password cannot be blank)
 
 I've built 3 different Image Upload options:
 
 **A. Images & Add images (URL Upload) [Custom Built API endpoints]**
 
   -Images Tab displays all the images that have been uploaded via a URL, and has some base images already uploaded
+  
+  -Images Tab: User can delete images by clicking the button (NOTE: There might be a delay when interacting with Heroku backend, though if you refresh the page the image should be deleted)
+  
   -Add Images is where user can upload an Image URL, Description, and Price; all three are required
+  
   -Add Images also has Form Validation to make sure the User inputs are non-empty and contain the correct info
 
 **B. Cloud Images & Cloud Upload: [Custom Built API endpoints]**
 
   -Cloud Images displays all images in the "shopali" cloudinary cloud instance
+  
   -Cloud Upload: Here is where the User can upload an image from the user's own computer files
+  
   -Cloud Upload: Images uploaded from here are uploaded directly to the Cloudinary cloud, and will be displayed afterwards on the Cloud Images tab
 
 **C. Puppies: [Public API]**
   
-  - This tab interacts with a public API for Dog Images
+  - This tab interacts with the public Dog CEO API [https://dog.ceo/] for Dog Images
+  
   - Click on the type of dog you would like to see and they will populate on the page
 
 
-#Endpoints (must be logged in):
+#Backend Endpoints:
+- https://backend-shopali.herokuapp.com/
 - https://backend-shopali.herokuapp.com/api/auth
-- https://backend-shopali.herokuapp.com/api/images (need to be logged in)
+- https://backend-shopali.herokuapp.com/api/images (need to be logged in - POSTMAN)
 - https://backend-shopali.herokuapp.com/api/cloudinary
-- https://backend-shopali.herokuapp.com/api/users     (need to be logged in)
+- https://backend-shopali.herokuapp.com/api/users/admin     (need to be admin and logged in - POSTMAN)
 
 
 
@@ -96,7 +105,7 @@ Admin Control: Uses middleware to check the "department" of user to see if they 
 - API endpoints & HTTP Codes
 ## Description
 
-Uses `Node.js` and `Express` to build a sample Flex API that performs _CRUD_ operations on `dummy data`.
+Uses `Node.js` and `Express` to build the Shopali API that performs _CRUD_ operations on `given data`.
 
 ### Database Persistence Helpers
 
@@ -106,7 +115,7 @@ Database access will be done using the `dbConfig.js` file included inside the `d
 
 ### Users Model
 
-This module allows controls the users registered for the application. Functions require {"department":"admin"} to access and has the following methods:
+This module controls the users registered for the application. Functions require {"department":"admin"} to access and has the following methods:
 Admin privaleges are created via the custom middleware file called: "check-role-middleware", created to check if a user's department = admin.  
 
 - `find()`: calling find returns a promise that resolves to an array of all the `users` contained in the database, must be admin to view.
@@ -208,6 +217,10 @@ Auth:
 - GET  | https://backend-shopali.herokuapp.com/api/users/admin (must be admin)
 - DEL  | https://backend-shopali.herokuapp.com/api/users/admin/2 (must be admin)
 
+### Backend Testing
+- Each model in the backend has an assoicated test file in the same folder
+- Test run via `npm run test` and uses Jest framework
+- All tests passing currently
 
 ### Front End
 - Front end is built & deployed using create-react-app (deployed via Vercel)
