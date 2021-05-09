@@ -484,10 +484,12 @@ footer {
 
 .logoheader {
   display: flex;
+  font-size: 6rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 100px;
+  margin-left: auto;
   object-fit: scale;
+
 
 }
