@@ -8,7 +8,6 @@ function ImageList() {
     const [reloadingImages, setReloadingImages] = useState(false);
 
 
-    imageDeleted(false);
 
     useEffect(() => {
         axiosWithAuth().get('https://backend-shopali.herokuapp.com/api/images')
@@ -28,7 +27,7 @@ function ImageList() {
           .then((res) => {
             console.log("DELETE deleteImage EditProduct.js: ", res);
             setReloadingImages(!reloadingImages);
-
+            console.log(imageDeleted());
             setImageDeleted(true);
             setTimeout(function () {
                 setImageDeleted(false);

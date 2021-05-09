@@ -23,7 +23,7 @@ function Login(props) {
             console.log("login post response" , res);
             localStorage.setItem('token', JSON.stringify(res.data.token))
             props.setLogged(true);
-            props.history.push('/flexdata');
+            props.history.push('/images');
 
         })
         .catch(err => {

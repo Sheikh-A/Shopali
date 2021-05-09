@@ -23,7 +23,7 @@ server.use(express.static('public'));
 server.use('/api/auth', authRouter);
 server.use('/api/images', authenticate, imageRouter)
 server.use("/api/users", authenticate, usersRouter);
-server.use("/api/cloudinary", authenticate, cloudinaryRouter);
+server.use("/api/cloudinary", cloudinaryRouter);
 
 server.get('/', (req, res) => {
     res.status(200).send((`<h1>API: Up Up and Away, welcome Shopify Friends!</h1>`))
