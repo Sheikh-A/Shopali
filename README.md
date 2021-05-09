@@ -36,6 +36,7 @@
 2. Once registered user can login [might take a minute due to Heroku DB free instance]
 
 I've built 3 different Image Upload options:
+
 A. Images & Add images (URL Upload) [Custom Built API endpoints]
   -Images Tab displays all the images that have been uploaded via a URL, and has some base images already uploaded
   -Add Images is where user can upload an Image URL, Description, and Price; all three are required
