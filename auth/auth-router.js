@@ -8,7 +8,7 @@ const { isValid } = require("../users/users-service");
 
 
 router.get('/', (req, res) => {
-    res.status(200).send((`<h1>Auth Router up and running! Use Postman or https://aliport.vercel.app/ to post</h1>`))
+    res.status(200).send((`<h1>Auth Router up and running! Use Postman or Front End to post</h1>`))
 });
 
 router.post("/register", (req, res) => {
