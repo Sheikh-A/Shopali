@@ -37,17 +37,17 @@
 
 I've built 3 different Image Upload options:
 
-A. Images & Add images (URL Upload) [Custom Built API endpoints]
+**A. Images & Add images (URL Upload) [Custom Built API endpoints]**
   -Images Tab displays all the images that have been uploaded via a URL, and has some base images already uploaded
   -Add Images is where user can upload an Image URL, Description, and Price; all three are required
   -Add Images also has Form Validation to make sure the User inputs are non-empty and contain the correct info
 
-B. Cloud Images & Cloud Upload: [Custom Built API endpoints]
+**B. Cloud Images & Cloud Upload: [Custom Built API endpoints]**
   -Cloud Images displays all images in the "shopali" cloudinary cloud instance
   -Cloud Upload: Here is where the User can upload an image from the user's own computer files
   -Cloud Upload: Images uploaded from here are uploaded directly to the Cloudinary cloud, and will be displayed afterwards on the Cloud Images tab
 
-C. Puppies: [Public API]
+**C. Puppies: [Public API]**
   - This tab interacts with a public API for Dog Images
   - Click on the type of dog you would like to see and they will populate on the page
 
