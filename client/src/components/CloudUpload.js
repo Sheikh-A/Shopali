@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from 'theme-ui';
-import React, {useState} from 'react';
+import {useState} from 'react';
 import Alert from '../components/Alert.js';
 import Button from '../Button.js';
 
