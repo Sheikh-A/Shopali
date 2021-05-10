@@ -89,7 +89,7 @@ User Authentication System: Hashs user's passwords before saving it to the datab
 
 Uses **JSON Web Tokens** to keep users authenticated across requests.
 
-Admin Control: Uses middleware to check the "department" of user to see if they are "admin". Only admin can delete users & only admin can see all users.
+**Admin Control: ONLY ADMIN CAN VIEW USERS AND DELETE USERS. Uses middleware to check the "department" of user to see if they are "admin". Only admin can delete users & only admin can see all users.**
 
 ### Design of the endpoints.
 
