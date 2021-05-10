@@ -31,6 +31,9 @@
 
 #Backend Deployed here: https://backend-shopali.herokuapp.com/
 
+[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![jest](https://jestjs.io/img/jest-badge.svg)](https://github.com/facebook/jest)
+
 #INSTRUCTIONS - https://shopali.vercel.app/
 1. User must register an account to login (please note given we are using Heroku and a free instance, DB may be slow to respond)
 2. Once registered user can login [might take a minute due to Heroku DB free instance]
@@ -221,6 +224,11 @@ Auth:
 - Each model in the backend has an assoicated test file in the same folder
 - Test run via `npm run test` and uses Jest framework
 - All tests passing currently
+- Files:
+     - server.test.js
+     - image-model.test.js
+     - cloudinary.test.js
+     - auth-router.test.js
 
 ### Front End
 - Front end is built & deployed using create-react-app (deployed via Vercel)
