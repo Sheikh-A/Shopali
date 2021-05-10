@@ -35,8 +35,8 @@ export default function Upload() {
           uploadImage(reader.result);
       };
       reader.onerror = () => {
-          console.error('AHHHHHHHH!!');
-          setErrMsg('something went wrong!');
+          console.error('Error loading image!!');
+          setErrMsg('error loading image!');
       };
   };
 

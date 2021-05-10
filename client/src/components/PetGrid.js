@@ -22,7 +22,7 @@ export default function PetGrid() {
         <button className="blackButtonDog" onClick={() => setBreed("husky")}>Huskies</button>
         <button className="blackButtonDog" onClick={() => setBreed("pug")}>Pugs</button>
         <button className="blackButtonDog" onClick={() => setBreed("mix")}>Mix</button>
-        <button className="blackButtonDog" onClick={() => setBreed("pitbull")}>Pitbull</button>
+        <button className="blackButtonDog" onClick={() => setBreed("beagle")}>Beagle</button>
         <button className="blackButtonDog" onClick={() => setBreed("labrador")}>Labrador</button>
         <button className="blackButtonDog" onClick={() => setBreed("lhasa")}>Lhasa</button>
       </div>
