@@ -25,7 +25,6 @@ export default function Home() {
                             key={index}
                             cloudName="shopali"
                             publicId={imageIds}
-                            width="300"
                             crop="scale"
                         />
                     ))}
