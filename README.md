@@ -133,19 +133,18 @@ Helpers are set up with the `image-model.js` and the following methods are creat
 - `findById()`: this method expects an `id` as it's only parameter and returns the image corresponding to the `id` provided or an empty array if no image with that `id` is found.
 - `add()`: calling add passing it a `image` object will add it to the database and return an object with the `id` of the inserted image. The object looks like this:
     `{
-        "id": 1,
+        "id": 1, 
         "image_url": "www.dogceo.com/image/1",
-        "description": "Dog ball"
+        "description": "Dog ball",
         "price": 10.42
-    },` The id is auto-generated while the user has to input image_url, description, and price
+        `},
 - `update()`: accepts three arguments, the first is the `id` of the image to update and the second is an object with the `changes` to apply. It returns the updated record. The id is taken from the URI. Here are the inputs:
-        `{
-            "id": "Test1",
-            "image_url": "www.dogceo/com/image/2",
-            "description": "Dog 2",
-            "price": 100.00
-
-        },`
+     `{
+         "id": "Test1",
+         "image_url": "www.dogceo/com/image/2",
+         "description": "Dog 2",
+         "price": 100.00
+        }`,
 - `remove()`: the remove method accepts an `id` as its first parameter and upon successfully deleting the image from the database it returns the image_id that was deleted.
 - `findAllImages()`: returns a list of all the image URLs
 
